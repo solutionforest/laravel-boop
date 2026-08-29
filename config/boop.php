@@ -65,9 +65,10 @@ return [
     |--------------------------------------------------------------------------
     |
     | Retried only for network errors and 5xx responses (never 4xx).
-    | max_retries is the number of additional attempts after the first
-    | (so 2 = up to 3 requests total). retry_delay is the base backoff in
-    | milliseconds; jitter is applied per attempt.
+    | max_retries is passed straight to Http::retry() — it is the total number
+    | of attempts (so 2 = 1 initial request + 1 retry, up to 2 requests).
+    | retry_delay is the base backoff in milliseconds; jitter is applied per
+    | attempt.
     |
     */
 

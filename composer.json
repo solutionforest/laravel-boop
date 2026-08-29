@@ -1,8 +1,27 @@
 {
-    "name": "solutionforest/laravel-boop",
+    "name": "solution-forest/laravel-boop",
     "description": "Send events to a self-hosted Boop server from Laravel.",
-    "keywords": ["boop", "notifications", "laravel", "push"],
+    "keywords": [
+        "SolutionForest",
+        "laravel",
+        "boop",
+        "notifications",
+        "push",
+        "laravel-boop"
+    ],
+    "homepage": "https://github.com/solutionforest/laravel-boop",
+    "support": {
+        "issues": "https://github.com/solutionforest/laravel-boop/issues",
+        "source": "https://github.com/solutionforest/laravel-boop"
+    },
     "license": "MIT",
+    "authors": [
+        {
+            "name": "Solution Forest",
+            "email": "info@solutionforest.net",
+            "role": "Developer"
+        }
+    ],
     "require": {
         "php": "^8.1",
         "ext-json": "*",

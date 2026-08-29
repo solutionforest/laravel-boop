@@ -197,6 +197,28 @@ class BoopTest extends TestCase
         Bus::assertNotDispatched(SendEvent::class);
     }
 
+    public function test_sendAsync_never_throws_when_dispatch_fails(): void
+    {
+        Http::fake();
+
+        \Illuminate\Support\Facades\Bus::swap(
+            \Mockery::mock(\Illuminate\Contracts\Bus\Dispatcher::class)
+                ->shouldReceive('dispatchAfterResponse')
+                ->andThrow(new \RuntimeException('queue down'))
+                ->getMock()
+        );
+
+        $boop = app(Boop::class);
+
+        try {
+            $boop->sendAsync(['title' => 'x']);
+        } catch (\Throwable $e) {
+            $this->fail('sendAsync must never throw, got '.get_class($e).': '.$e->getMessage());
+        }
+
+        $this->assertTrue(true);
+    }
+
     public function test_sendAsync_disabled_is_noop(): void
     {
         Bus::fake();
