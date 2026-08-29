@@ -1,0 +1,28 @@
+services:
+  boop:
+    build:
+      context: https://github.com/chrisgreg/boop.git#main:server
+    image: ghcr.io/chrisgreg/boop:latest
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    volumes:
+      # The container runs as uid 1000. On Linux hosts run `mkdir -p data && chown 1000:1000 data` once.
+      - "./data:/data"
+    environment:
+      # SQLite lives on the mounted volume; keep it in sync with the volume above.
+      BOOP_DATABASE_PATH: /data/boop.db
+      # Public address your phone will use to reach Boop. http://localhost:8080 is fine for local dev.
+      BOOP_BASE_URL: http://localhost:8080
+      BOOP_LOG_LEVEL: info
+      # Protects the web UI with a single login. Leave blank to run without a
+      # login (dev only — do that behind your own proxy/VPN). Password: 8+ characters.
+      BOOP_ADMIN_USER: admin
+      BOOP_ADMIN_PASSWORD: change-me-please
+      # Apple Push Notifications. Leave blank until you have an APNs key; Boop
+      # runs without them, but pushes are skipped.
+      APNS_TEAM_ID: ""
+      APNS_KEY_ID: ""
+      APNS_BUNDLE_ID: ""
+      APNS_PRIVATE_KEY: ""
+      APNS_ENVIRONMENT: sandbox
