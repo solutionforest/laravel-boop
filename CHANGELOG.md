@@ -1,8 +1,21 @@
 # Changelog
 
-All notable changes to `solutionforest/laravel-boop` will be documented in this file.
+All notable changes to `solution-forest/laravel-boop` will be documented in this file.
 
 ## [Unreleased]
+
+### Changed
+
+- Composer package renamed to `solution-forest/laravel-boop` (namespace unchanged, `SolutionForest\Boop`).
+- `composer.json` now declares `homepage`, `support` (issues + source), `authors` and expanded `keywords`.
+- `sendAsync()` captures the event title before validation, so the never-throw guarantee holds even if dispatch itself throws.
+- `max_retries` documentation clarified: it is the total attempt count passed to `Http::retry()` (2 = 1 initial + 1 retry), not retries-after-first.
+
+### Added
+
+- README "What is Boop" section (self-hosted notification inbox; what it replaces).
+- README "Quick start" section + `docker-compose.boop.yml` for a local dev Boop instance.
+- README note on per-call `overrides` for `sendAsync()`.
 
 ### Added
 
