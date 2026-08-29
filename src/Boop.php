@@ -57,6 +57,8 @@ class Boop
      */
     public function sendAsync(string|array $event, array $overrides = []): void
     {
+        $title = $this->titleOf($event);
+
         try {
             if (! $this->enabled($overrides)) {
                 return;
@@ -66,9 +68,9 @@ class Boop
 
             Bus::dispatchAfterResponse(new SendEvent($event->toPayload()));
         } catch (BoopError $e) {
-            $this->logFailure($e, $this->titleOf($event));
+            $this->logFailure($e, $title);
         } catch (\Throwable $e) {
-            $this->logFailure(BoopError::fromThrowable($e), $this->titleOf($event));
+            $this->logFailure(BoopError::fromThrowable($e), $title);
         }
     }
 
